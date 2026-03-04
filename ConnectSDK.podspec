@@ -4,6 +4,7 @@
 # * pod "ConnectSDK/FireTV"      -> Core + FireTV (Amazon Fling must be added manually)
 
 Pod::Spec.new do |s|
+
   s.name         = "ConnectSDK"
   s.version      = "2.1.9"
   s.summary      = "Connect SDK is an open source framework that connects your mobile apps with multiple TV platforms."
@@ -98,7 +99,7 @@ PREFIX
   end
 
   # ============================================================
-  # FireTV (Amazon Fling)
+  # FireTV (Amazon Fling - manual integration)
   # ============================================================
 
   s.subspec 'FireTV' do |sp|
@@ -109,11 +110,11 @@ PREFIX
     sp.exclude_files = "#{firetv_dir}/*Tests/**/*"
     sp.private_header_files = "#{firetv_dir}/**/*_Private.h"
 
-    # ⚠️ Amazon Fling SDK không có trên CocoaPods
-    # Bạn phải tự thêm AmazonFling.framework vào thư mục modules/firetv/
-
-    sp.vendored_frameworks = "#{firetv_dir}/AmazonFling.framework"
+    # Amazon Fling SDK is NOT included in this repository.
+    # The application must add AmazonFling.xcframework manually
+    # to its main Xcode project.
 
     sp.frameworks = "UIKit", "Foundation"
   end
+
 end
