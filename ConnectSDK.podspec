@@ -92,7 +92,6 @@ Pod::Spec.new do |s|
     sp.exclude_files = (non_arc_files.dup << "core/ConnectSDK*Tests/**/*" << "core/Frameworks/LGCast/**/*.h")
     sp.private_header_files = "core/**/*_Private.h"
     sp.requires_arc = true
-
     sp.dependency 'ConnectSDK/no-arc'
     sp.ios.vendored_frameworks = 'core/Frameworks/LGCast/LGCast.xcframework', 'core/Frameworks/LGCast/GStreamerForLGCast.xcframework'
     sp.preserve_paths =  'core/Frameworks/LGCast/LGCast.xcframework', 'core/Frameworks/LGCast/GStreamerForLGCast.xcframework'
@@ -107,8 +106,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'GoogleCast' do |sp|
     cast_dir = "modules/google-cast"
-  s.subspec 'FireTV' do |sp|
-    firetv_dir = "modules/firetv"
+
     sp.dependency 'ConnectSDK/Core'
     sp.source_files = "#{cast_dir}/**/*.{h,m}"
     sp.exclude_files = "#{cast_dir}/*Tests/**/*"
