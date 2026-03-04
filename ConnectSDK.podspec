@@ -103,9 +103,7 @@ Pod::Spec.new do |s|
     # disable all warnings from asi-http-request
     sp.compiler_flags = '-w'
   end
-s.dependency 'AmazonFling',
-  :git => 'https://gitlab.com/crelies/AmazonFling.git',
-  :branch => '1.3.5'
+  s.dependency 'AmazonFling', '1.3.5'
   s.subspec 'GoogleCast' do |sp|
     cast_dir = "modules/google-cast"
 
