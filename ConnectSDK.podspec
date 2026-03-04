@@ -1,15 +1,13 @@
 Pod::Spec.new do |s|
   s.name         = "ConnectSDK"
   s.version      = "2.1.9"
-  s.summary      = "Connect SDK is an open source framework that connects your mobile apps with multiple TV platforms."
+  s.summary      = "Connect SDK"
   s.description  = "Connect SDK allows discovery and communication with multiple TV platforms."
   s.homepage     = "http://www.connectsdk.com/"
   s.license      = { :type => "Apache License, Version 2.0", :file => "LICENSE" }
   s.author       = { "Connect SDK" => "support@connectsdk.com" }
-  s.social_media_url = "http://twitter.com/ConnectSDK"
 
   s.platform     = :ios, "11.0"
-  s.ios.deployment_target = "11.0"
 
   s.source = {
     :git => "https://github.com/HaiDragon74/Connect-SDK-iOS.git",
@@ -20,13 +18,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.libraries = "z", "icucore"
 
-  # 🔥 FIX DLog tại đây
-  s.pod_target_xcconfig = {
-    "OTHER_LDFLAGS" => "$(inherited) -ObjC",
-    "GCC_PREPROCESSOR_DEFINITIONS" => "$(inherited) DLog(...)="
-  }
-
-  # Nếu muốn pod 'ConnectSDK' include luôn FireTV + GoogleCast
   s.default_subspecs = ['Core', 'FireTV', 'GoogleCast']
 
   non_arc_files =
@@ -43,6 +34,12 @@ Pod::Spec.new do |s|
     sp.requires_arc = true
 
     sp.dependency 'ConnectSDK/no-arc'
+
+    # 🔥 FIX DLog tại đây
+    sp.pod_target_xcconfig = {
+      "OTHER_LDFLAGS" => "$(inherited) -ObjC",
+      "GCC_PREPROCESSOR_DEFINITIONS" => "$(inherited) DLog(...)="
+    }
 
     sp.ios.vendored_frameworks =
       'core/Frameworks/LGCast/LGCast.xcframework',
@@ -77,11 +74,6 @@ Pod::Spec.new do |s|
     cast_version = "2.7.1"
     sp.dependency "google-cast-sdk", cast_version
     sp.framework = "GoogleCast"
-
-    sp.xcconfig = {
-      "FRAMEWORK_SEARCH_PATHS" =>
-      "$(PODS_ROOT)/google-cast-sdk/GoogleCastSDK-#{cast_version}-Release"
-    }
   end
 
   # =======================
@@ -101,5 +93,4 @@ Pod::Spec.new do |s|
 
     sp.requires_arc = true
   end
-
 end
