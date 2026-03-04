@@ -2,9 +2,7 @@ Pod::Spec.new do |s|
   s.name         = "ConnectSDK"
   s.version      = "2.1.9"
   s.summary      = "Connect SDK is an open source framework that connects your mobile apps with multiple TV platforms."
-
   s.description  = "Connect SDK allows discovery and communication with multiple TV platforms."
-
   s.homepage     = "http://www.connectsdk.com/"
   s.license      = { :type => "Apache License, Version 2.0", :file => "LICENSE" }
   s.author       = { "Connect SDK" => "support@connectsdk.com" }
@@ -22,8 +20,10 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.libraries = "z", "icucore"
 
-  s.xcconfig = {
-    "OTHER_LDFLAGS" => "$(inherited) -ObjC"
+  # 🔥 FIX DLog tại đây
+  s.pod_target_xcconfig = {
+    "OTHER_LDFLAGS" => "$(inherited) -ObjC",
+    "GCC_PREPROCESSOR_DEFINITIONS" => "$(inherited) DLog(...)="
   }
 
   # Nếu muốn pod 'ConnectSDK' include luôn FireTV + GoogleCast
@@ -96,7 +96,6 @@ Pod::Spec.new do |s|
     sp.exclude_files = "#{firetv_dir}/*Tests/**/*"
     sp.private_header_files = "#{firetv_dir}/**/*_Private.h"
 
-    # Nếu có framework Amazon Fling thì đặt trong modules/firetv/Frameworks
     sp.vendored_frameworks = "#{firetv_dir}/Frameworks/*.framework"
     sp.preserve_paths = "#{firetv_dir}/Frameworks/*.framework"
 
