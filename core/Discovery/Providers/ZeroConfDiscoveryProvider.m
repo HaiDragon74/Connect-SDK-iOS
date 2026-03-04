@@ -136,7 +136,6 @@
     if ([_resolvingDevices objectForKey:aNetService.name] || [_discoveredDevices objectForKey:aNetService.name])
         return;
 
-    DLog(@"%@ : %@", aNetService.name, aNetService.domain);
 
     [aNetService setDelegate:self];
     [aNetService resolveWithTimeout:5.0];
@@ -151,7 +150,7 @@
     if (![_discoveredDevices objectForKey:aNetService.name])
         return;
 
-    DLog(@"%@", aNetService.name);
+
 
     ServiceDescription *serviceDescription = _discoveredDevices[aNetService.name];
 
@@ -223,7 +222,6 @@
     // according to Apple's docs, it is possible to have a service resolve with no addresses
     if (!sender.addresses || sender.addresses.count == 0)
     {
-        DLog(@"%@ resolved with 0 addresses, bailing ...", sender.name);
         return;
     }
 
@@ -234,14 +232,11 @@
         if ((foundIPv4Address = [self parseAddressData:addressData
                                          intoIPAddress:&address
                                                andPort:&port])) {
-            DLog(@"%@: resolved %@:%d", sender.name, address, port);
             *stop = YES;
         }
     }];
 
     if (!foundIPv4Address) {
-        DLog(@"%@: couldn't find resolved IPv4 addresses (%ld total)",
-             sender.name, (unsigned long)sender.addresses.count);
         return;
     }
 
@@ -281,12 +276,12 @@
 
 - (void) netService:(NSNetService *)sender didUpdateTXTRecordData:(NSData *)data
 {
-    DLog(@"%@", sender.name);
+
 }
 
 - (void) netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
 {
-    DLog(@"%@ : %@", sender.name, errorDict);
+
 
     [_resolvingDevices removeObjectForKey:sender.name];
 }
