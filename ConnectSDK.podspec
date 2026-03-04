@@ -106,7 +106,8 @@ Pod::Spec.new do |s|
 
   s.subspec 'GoogleCast' do |sp|
     cast_dir = "modules/google-cast"
-
+  s.subspec 'FireTV' do |sp|
+    firetv_dir = "modules/firetv"
     sp.dependency 'ConnectSDK/Core'
     sp.source_files = "#{cast_dir}/**/*.{h,m}"
     sp.exclude_files = "#{cast_dir}/*Tests/**/*"
