@@ -107,6 +107,20 @@ Pod::Spec.new do |s|
   s.subspec 'GoogleCast' do |sp|
     cast_dir = "modules/google-cast"
 
+    sp.dependency 'ConnectSDK/Core'
+    sp.source_files = "#{cast_dir}/**/*.{h,m}"
+    sp.exclude_files = "#{cast_dir}/*Tests/**/*"
+    sp.private_header_files = "#{cast_dir}/**/*_Private.h"
+
+    cast_version = "2.7.1"
+    sp.dependency "google-cast-sdk", cast_version
+    sp.framework = "GoogleCast"
+    sp.xcconfig = {
+        "FRAMEWORK_SEARCH_PATHS" => "$(PODS_ROOT)/google-cast-sdk/GoogleCastSDK-#{cast_version}-Release",
+    }
+  end
+
+
   s.subspec 'FireTV' do |sp|
     firetv_dir = "modules/firetv"
 
@@ -116,9 +130,9 @@ Pod::Spec.new do |s|
     sp.exclude_files = "#{firetv_dir}/*Tests/**/*"
     sp.private_header_files = "#{firetv_dir}/**/*_Private.h"
 
-    # Amazon Fling SDK is NOT distributed via CocoaPods.
-    # Developer must manually add AmazonFling.framework
     sp.frameworks = 'UIKit', 'Foundation'
     sp.libraries = 'z', 'c++'
   end
+
+end
 end
