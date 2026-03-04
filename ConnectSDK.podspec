@@ -132,7 +132,5 @@ Pod::Spec.new do |s|
 
     sp.frameworks = 'UIKit', 'Foundation'
     sp.libraries = 'z', 'c++'
-  end
-
 end
 end
