@@ -103,7 +103,7 @@ Pod::Spec.new do |s|
     # disable all warnings from asi-http-request
     sp.compiler_flags = '-w'
   end
-
+  s.dependency 'AmazonFling'
   s.subspec 'GoogleCast' do |sp|
     cast_dir = "modules/google-cast"
 
@@ -114,7 +114,7 @@ Pod::Spec.new do |s|
 
     cast_version = "2.7.1"
     sp.dependency "google-cast-sdk", cast_version
-    sp.dependency 'AmazonFling', '1.3.5'
+
     sp.framework = "GoogleCast"
     sp.xcconfig = {
         "FRAMEWORK_SEARCH_PATHS" => "$(PODS_ROOT)/google-cast-sdk/GoogleCastSDK-#{cast_version}-Release",
